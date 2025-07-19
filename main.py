@@ -12,7 +12,6 @@ from shot import Shot
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-    dt = 0
     clock = pygame.time.Clock()
     
     updatable = pygame.sprite.Group()
@@ -20,18 +19,16 @@ def main():
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
 
-    Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids,updatable,drawable)
-    AsteroidField.containers = (updatable)
     Shot.containers = (shots,updatable,drawable)
-
+    AsteroidField.containers = updatable
     asterofield = AsteroidField()
 
-
+    Player.containers = (updatable, drawable)
 
     player = Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
-    updatable.add(player)
-    drawable.add(player)
+
+    dt = 0
 
     while True:
         for event in pygame.event.get():
